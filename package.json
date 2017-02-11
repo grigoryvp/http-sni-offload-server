@@ -1,6 +1,6 @@
 {
   "name": "http-sni-offload-server",
-  "version": "0.1.1",
+  "version": "1.0.2",
   "description": "Minimal haproxy+node Docker container that offloads http(s) without decryption",
   "main": "entrypoint.js",
   "repository": {
