@@ -24,7 +24,7 @@ docker network create int
 Build and this container and configure it for auto restart:
 ```sh
 docker build --tag="http-sni-offload-server" https://github.com/grigoryvp/http-sni-offload-server.git
-docker run --restart=always --net=int -p 0.0.0.0:80:80 -p 0.0.0.0:443:443 --name="http-sni-offload-server" -d http-sni-offload-server
+docker run --restart=always --net=int -p 80:80 -p 443:443 --name="http-sni-offload-server" -d http-sni-offload-server
 ```
 
 Backends register themselves by sending HTTP POST request to
