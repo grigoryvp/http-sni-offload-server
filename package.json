@@ -1,0 +1,17 @@
+{
+  "name": "http-sni-offload-server",
+  "version": "0.1.1",
+  "description": "Minimal haproxy+node Docker container that offloads http(s) without decryption",
+  "main": "entrypoint.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grigoryvp/http-sni-offload-server.git"
+  },
+  "author": "Grigory Petrov",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  }
+}
+
