@@ -31,19 +31,19 @@ app.all('/', (req, res) => {
           }
         }
         if (isChanged) {
-          return update(() => res.status(200).send("ok"));
+          return update(() => res.status(200).send("ok\n"));
         }
         else {
-          return res.status(200).send("already registered");
+          return res.status(200).send("already registered\n");
         }
       }
       else {
-        return res.status(400).send("'domains' value is not a list");
+        return res.status(400).send("'domains' value is not a list\n");
       }
     case 'update':
-      return update(() => res.status(200).send("ok"));
+      return update(() => res.status(200).send("ok\n"));
     default:
-      return res.status(400).send("unknown 'cmd' value");
+      return res.status(400).send("unknown 'cmd' value\n");
   }
 });
 
