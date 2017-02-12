@@ -45,3 +45,27 @@ echo test > ./public/index.html
 node ./node_modules/.bin/http-server -p 80
 ```
 
+## Client registration
+
+Typical docker script with nginx:
+```sh
+#!/usr/bin/env bash
+register() {
+  while true; do
+    curl --data @- http-sni-offload-server:8080 2>&1 >/dev/null <<EOT
+      {
+        "cmd": "register",
+        "domains": [
+          "foo.ru",
+          "www.foo.ru"
+        ]
+      }
+EOT
+    sleep 10
+  done
+}
+# Register continously every 10s in case the offloader is restarted.
+register &
+nginx -p / -c nginx.conf -g "daemon off;"
+```
+
