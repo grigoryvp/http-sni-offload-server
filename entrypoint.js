@@ -112,8 +112,11 @@ function update(next) {
   config.push('');
   const filename = '/etc/haproxy/haproxy.cfg';
   fs.writeFile(filename, config.join("\n"), 'utf-8', () => {
-    child_process.exec('service haproxy restart', () => {
-      next()
+    //! Using 'restart' can lead to multiple HAProxy, https://goo.gl/7JuMIG
+    child_process.exec('service haproxy stop', () => {
+      child_process.exec('service haproxy start', () => {
+        next();
+      });
     });
   });
 }
