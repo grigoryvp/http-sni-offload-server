@@ -54,6 +54,7 @@ function update(next) {
     '  timeout connect 5000',
     '  timeout client  50000',
     '  timeout server  50000',
+    '  option forceclose',
     '',
     'frontend in-http',
     '  bind 0.0.0.0:80',
@@ -112,11 +113,8 @@ function update(next) {
   config.push('');
   const filename = '/etc/haproxy/haproxy.cfg';
   fs.writeFile(filename, config.join("\n"), 'utf-8', () => {
-    //! Using 'restart' can lead to multiple HAProxy, https://goo.gl/7JuMIG
-    child_process.exec('service haproxy stop', () => {
-      child_process.exec('service haproxy start', () => {
-        next();
-      });
+    child_process.exec('service haproxy relolad', () => {
+      next();
     });
   });
 }
