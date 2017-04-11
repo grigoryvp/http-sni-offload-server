@@ -3,7 +3,8 @@ const fs = require('fs');
 const child_process = require('child_process');
 
 
-let backends = {};
+const backends = {};
+let haproxyProcess = null;
 
 
 const app = express();
@@ -113,9 +114,10 @@ function update(next) {
   config.push('');
   const filename = '/etc/haproxy/haproxy.cfg';
   fs.writeFile(filename, config.join("\n"), 'utf-8', () => {
-    child_process.exec('service haproxy relolad', () => {
-      next();
-    });
+    if (haproxyProcess) haproxyProcess.kill();
+    const args = ['-f', filename];
+    haproxyProcess = child_process.spawn('/usr/sbin/haproxy', args);
+    next();
   });
 }
 
